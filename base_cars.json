@@ -1,0 +1,92 @@
+[
+  {
+    "make": "Toyota",
+    "model": "Camry",
+    "year": 2020,
+    "mileage": 5000.0,
+    "min_rent": 1,
+    "max_rent": 30,
+    "daily_rate": 50.0
+  },
+  {
+    "make": "Honda",
+    "model": "Civic",
+    "year": 2019,
+    "mileage": 8000.0,
+    "min_rent": 2,
+    "max_rent": 15,
+    "daily_rate": 40.0
+  },
+  {
+    "make": "Ford",
+    "model": "Focus",
+    "year": 2021,
+    "mileage": 3000.0,
+    "min_rent": 1,
+    "max_rent": 20,
+    "daily_rate": 45.0
+  },
+  {
+    "make": "Chevrolet",
+    "model": "Malibu",
+    "year": 2020,
+    "mileage": 6000.0,
+    "min_rent": 3,
+    "max_rent": 25,
+    "daily_rate": 48.0
+  },
+  {
+    "make": "Nissan",
+    "model": "Altima",
+    "year": 2019,
+    "mileage": 10000.0,
+    "min_rent": 2,
+    "max_rent": 18,
+    "daily_rate": 42.0
+  },
+  {
+    "make": "BMW",
+    "model": "3 Series",
+    "year": 2021,
+    "mileage": 4000.0,
+    "min_rent": 1,
+    "max_rent": 10,
+    "daily_rate": 80.0
+  },
+  {
+    "make": "Mercedes-Benz",
+    "model": "C-Class",
+    "year": 2020,
+    "mileage": 7000.0,
+    "min_rent": 2,
+    "max_rent": 12,
+    "daily_rate": 85.0
+  },
+  {
+    "make": "Hyundai",
+    "model": "Elantra",
+    "year": 2018,
+    "mileage": 12000.0,
+    "min_rent": 1,
+    "max_rent": 25,
+    "daily_rate": 38.0
+  },
+  {
+    "make": "Kia",
+    "model": "Optima",
+    "year": 2019,
+    "mileage": 9500.0,
+    "min_rent": 2,
+    "max_rent": 20,
+    "daily_rate": 44.0
+  },
+  {
+    "make": "Tesla",
+    "model": "Model 3",
+    "year": 2022,
+    "mileage": 1500.0,
+    "min_rent": 1,
+    "max_rent": 7,
+    "daily_rate": 100.0
+  }
+]
