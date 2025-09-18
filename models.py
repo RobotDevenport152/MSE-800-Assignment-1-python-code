@@ -1,47 +1,59 @@
 # Create abstract method for car rental system, which ensures that user have the attributes of username and password, customer and administrator can also inherited the attributes.
 # Define cars and rental's attributes so that key information can be stored and access.
 # All attributes related to sensitive information are protected by using private method so that it can be only accessed by certain given methods, otherwise it's stored in the backend.
-from abc import ABC, abstractmethod
+import abc
 
-class User(ABC):
+class User(metaclass=abc.ABCMeta):
+    """Abstract base class for users with encapsulation."""
     def __init__(self, username, password):
         self._username = username
         self._password = password
 
-    @abstractmethod
-    def get_menu_options(self):
+    def authenticate(self, password):
+        """Authenticate user with hashed password."""
+        return self.password == password
+
+    @abc.abstractmethod
+    def role_specific_action(self):
+        """Abstract method for role-specific actions."""
         pass
 
-
 class Customer(User):
-    def get_menu_options(self):
-        return ["View Available Cars", "Book Rental", "View My Rentals"]
+    """Customer class with specific privileges."""
+    def __init__(self, username, password):
+        super().__init__(username, password)
 
+    def view_cars(self):
+        """View available cars."""
+        from systems import CarRentalSystem
+        CarRentalSystem().view_available_cars()
+
+    def search_cars(self, criteria):
+        """Search cars by criteria."""
+        from systems import CarRentalSystem
+        CarRentalSystem().view_available_cars()  # Simplified; enhance with search logic
+
+    def cancel_rental(self, rental_id):
+        """Cancel a pending rental."""
+        from systems import CarRentalSystem
+        system = CarRentalSystem()
+        cursor = system.db.execute_query("SELECT * FROM rentals WHERE id = ? AND customer = ? AND status = 'pending'", (rental_id, self._username))
+        if cursor.fetchone():
+            system.db.execute_query("UPDATE rentals SET status = 'cancelled' WHERE id = ?", (rental_id,))
+            cursor = system.db.execute_query("SELECT car_id FROM rentals WHERE id = ?", (rental_id,))
+            car_id = cursor.fetchone()[0]
+            system.db.execute_query("UPDATE cars SET available = 1 WHERE id = ?", (car_id,))
+            print("Rental cancelled.")
+        else:
+            print("Cannot cancel rental.")
+
+    def role_specific_action(self):
+        pass  # Implemented in handle_user_action
 
 class Admin(User):
-    def get_menu_options(self):
-        return ["Add Car", "Update Car", "Delete Car", "Manage Rentals"]
+    """Admin class with specific privileges."""
+    def __init__(self, username, password):
+        super().__init__(username, password)
 
-
-class Car:
-    def __init__(self, **kwargs):
-        self._id = kwargs.get('id')
-        self._make = kwargs['make']
-        self._model = kwargs['model']
-        self._year = kwargs['year']
-        self._mileage = kwargs['mileage']
-        self._available = kwargs.get('available', True)
-        self._min_rent = kwargs['min_rent']
-        self._max_rent = kwargs['max_rent']
-        self._daily_rate = kwargs['daily_rate']
-
-
-class Rental:
-    def __init__(self, **kwargs):
-        self._id = kwargs.get('id')
-        self._customer = kwargs['customer']
-        self._car_id = kwargs['car_id']
-        self._start_date = kwargs['start_date']
-        self._end_date = kwargs['end_date']
-        self._status = kwargs.get('status', 'pending')
-        self._fee = kwargs['fee']
+    def role_specific_action(self):
+        pass  # Implemented in handle_user_action

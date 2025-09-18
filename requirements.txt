@@ -1,0 +1,1 @@
+# No extra packages are required to run the file, as pycharm are used to run the car rental system, and sqllite 3 is used for the database.
