@@ -1,3 +1,12 @@
+"""Main entry point for the car rental system.
+
+    Provides a command-line interface for users to register, log in, and perform role-based actions.
+
+    Design Rationale:
+    - Serves as the application's entry point, orchestrating user interactions via a menu-driven interface.
+    - Uses a loop to maintain the application state until the user chooses to exit.
+    - Integrates with CarRentalSystem to handle all business logic, keeping the main function focused on user input/output.
+    """
 import models
 from systems import CarRentalSystem
 
