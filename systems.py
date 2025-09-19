@@ -197,10 +197,10 @@ class CarRentalSystem:
 
     def view_users(self):
         """View all users (Admin privilege)."""
-        cursor = self.db.execute_query("SELECT username, role FROM users")
+        cursor = self.db.execute_query("SELECT username, password, role FROM users")
         users = cursor.fetchall()
         if not users:
             print("No users found.")
             return
         for user in users:
-            print(f"Username: {user[0]}, Role: {user[1]}")
+            print(f"Username: {user[0]}, Password: {user[1]}, Role: {user[2]}")
