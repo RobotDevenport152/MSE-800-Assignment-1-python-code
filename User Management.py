@@ -24,7 +24,6 @@ class Customer(User):
 
     def book_car(self, car_id, start_date, end_date):
         """Book a car (creates rental)."""
-        from services.data_manager import DataManager
         from models.rental import Rental
         from datetime import datetime
         dm = DataManager.get_instance()
@@ -59,8 +58,6 @@ class Admin(User):
 
     def add_car(self, make, model, year, mileage, daily_rate, min_rent, max_rent):
         """Add a new car."""
-        from services.data_manager import DataManager
-        dm = DataManager.get_instance()
         car = Car(dm.next_car_id, make, model, year, mileage, daily_rate, min_rent, max_rent)
         dm.next_car_id += 1
         dm.add_car(car.__dict__)
@@ -68,20 +65,16 @@ class Admin(User):
 
     def update_car(self, car_id, **kwargs):
         """Update car details."""
-        from services.data_manager import DataManager
         DataManager.get_instance().update_car(car_id, **kwargs)
         print("Car updated.")
 
     def delete_car(self, car_id):
         """Delete a car."""
-        from services.data_manager import DataManager
         DataManager.get_instance().delete_car(car_id)
         print("Car deleted.")
 
     def manage_rentals(self):
         """View and manage rentals."""
-        from services.data_manager import DataManager
-        dm = DataManager.get_instance()
         rentals = dm.get_rentals()
         for r in rentals:
             print(f"ID: {r['id']}, Customer: {r['customer']}, Car: {r['car_id']}, Status: {r['status']}")
